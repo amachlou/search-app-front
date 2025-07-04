@@ -1,0 +1,8 @@
+<input [(ngModel)]="searchTerm" placeholder="Search products">
+<!-- <button (click)="onSearch()">Search</button> -->
+<h1>Product list</h1>
+<ul>
+  <li *ngFor="let p of products">
+    {{ p.name }} - {{ p.description }} - {{ p.price }} MAD
+  </li>
+</ul>

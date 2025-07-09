@@ -1,25 +1,37 @@
+import { Product } from './../models/product';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../models/product';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductService {
-  private apiUrl = 'http://localhost:8080/api/products';
+  private baseUrl = 'http://localhost:8080/api/products';
 
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    return this.http.get<Product[]>(this.baseUrl);
   }
 
-  search(query: string): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}/search?q=${query}`);
+  get(id: number): Observable<Product> {
+    return this.http.get<Product>(`${this.baseUrl}/${id}`);
   }
 
   create(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+    return this.http.post<Product>(this.baseUrl, product);
   }
 
-  // Add update/delete later
+  update(id: number, product: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.baseUrl}/${id}`, product);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  search(query: string): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.baseUrl}/search?q=${query}`);
+  }
 }

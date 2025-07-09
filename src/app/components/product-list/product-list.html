@@ -1,8 +1,33 @@
-<input [(ngModel)]="searchTerm" placeholder="Search products">
-<!-- <button (click)="onSearch()">Search</button> -->
-<h1>Product list</h1>
-<ul>
-  <li *ngFor="let p of products">
-    {{ p.name }} - {{ p.description }} - {{ p.price }} MAD
-  </li>
-</ul>
+<div class="container mt-4">
+  <h2 class="mb-3">Product List</h2>
+
+  <div class="input-group mb-4">
+    <input type="text" [(ngModel)]="searchTerm" (input)="search()" class="form-control"
+      placeholder="Search products..." />
+    <button class="btn btn-outline-secondary" (click)="loadAll()">Reset</button>
+  </div>
+
+  <div *ngIf="products.length === 0" class="alert alert-warning">
+    No products found.
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let product of products">
+      <div>
+        <strong>{{ product.name }}</strong><br />
+        <small class="text-muted">{{ product.description }}</small><br />
+        <span class="badge bg-primary mt-1">{{ product.price }} MAD</span>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-outline-primary btn-sm" (click)="update(product.id!, product)">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn btn-outline-danger btn-sm" (click)="delete(product.id!)">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </li>
+  </ul>
+
+</div>

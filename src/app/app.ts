@@ -1,12 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductListComponent } from "./components/product-list/product-list";
-import { ProductForm } from "./components/product-form/product-form";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ProductListComponent, ProductForm],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
